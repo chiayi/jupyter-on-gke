@@ -52,17 +52,15 @@ singleuser:
       description: "Profile 1"
       default: true
     - display_name: "Prof2"
-      description: "Profile 2"
+      description: "Profile 2 with extra gpus"
       kubespawner_override:
-        image: 
-          name: jupyter/datascience-notebook
-          tag: python-3.11
+        image: jupyter/datascience-notebook:python-3.11
+        extra_resource_limits:
+          nvidia.com/gpu: "3"
     - display_name: "Prof3"
       description: "Profile 3"
       kubespawner_override:
-        image:
-          name: jupyter/datascience-notebook
-          tag: python-3.11.4
+        image: jupyter/datascience-notebook:python-3.11.4
   cmd: null
   cloudMetadata:
     blockWithIptables: false
