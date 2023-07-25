@@ -24,7 +24,7 @@ resource "google_container_cluster" "ml_cluster" {
   location = var.region
   count    = var.enable_autopilot == false ? 1 : 0
 
-  initial_node_count = 3
+  initial_node_count = 1
 
   logging_config {
     enable_components = ["SYSTEM_COMPONENTS", "WORKLOADS"]
@@ -50,7 +50,7 @@ resource "google_container_node_pool" "gpu_pool" {
   count      = var.enable_autopilot == false ? 1 : 0
 
   autoscaling {
-    min_node_count = "0"
+    min_node_count = "1"
     max_node_count = "3"
   }
 
@@ -77,9 +77,14 @@ resource "google_container_node_pool" "gpu_pool" {
       env = var.project_id
     }
 
+    guest_accelerator {
+      type = var.gpu_type
+      count = 2
+    }
+
     # preemption = true
     image_type   = "cos_containerd"
-    machine_type = "a2-highgpu-1g"
+    machine_type = "n1-standard-1"
     tags         = ["gke-node", "${var.project_id}-gke"]
 
     disk_size_gb = "100"

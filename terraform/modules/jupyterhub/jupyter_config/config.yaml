@@ -46,7 +46,7 @@ singleuser:
   image:
     name: jupyter/datascience-notebook
     tag: python-3.10
-  startTimeout: 300
+  startTimeout: 700
   profileList:
     - display_name: "Prof1"
       description: "Profile 1"
@@ -56,11 +56,21 @@ singleuser:
       kubespawner_override:
         image: jupyter/datascience-notebook:python-3.11
         extra_resource_limits:
-          nvidia.com/gpu: "3"
+          nvidia.com/gpu: "1"
+      #  possible values: nvidia-tesla-k80, nvidia-tesla-p100, nvidia-tesla-p4, nvidia-tesla-v100, nvidia-tesla-t4, nvidia-tesla-a100, nvidia-a100-80gb, nvidia-l4
+        node_selector:
+          cloud.google.com/gke-accelerator: "nvidia-tesla-t4"
     - display_name: "Prof3"
       description: "Profile 3"
+      description: "Profile 3 with guarantee 2 extra gpus"
       kubespawner_override:
         image: jupyter/datascience-notebook:python-3.11.4
+        extra_resource_limits:
+          nvidia.com/gpu: "2"
+        extra_resource_guarantees:
+          nvidia.com/gpu: "2"
+        node_selector:
+          cloud.google.com/gke-accelerator: "nvidia-tesla-t4"
   cmd: null
   cloudMetadata:
     blockWithIptables: false

@@ -60,7 +60,6 @@ module "gke_autopilot" {
   enable_autopilot = var.enable_autopilot
 }
 
-
 module "gke_standard" {
   source = "./modules/gke_standard"
 
@@ -79,10 +78,9 @@ module "kubernetes" {
   enable_autopilot = var.enable_autopilot
 }
 
-# module "kuberay" {
-#   source = "./modules/kuberay"
+module "jupyterhub" {
+  source = "./modules/jupyterhub"
 
-#   depends_on   = [module.gke_autopilot, module.gke_standard]
-#   region       = var.region
-#   cluster_name = var.cluster_name
-# }
+  depends_on = [module.kubernetes]
+  namespace  = var.namespace
+}

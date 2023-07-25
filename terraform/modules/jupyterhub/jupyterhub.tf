@@ -12,11 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-data "http" "nvidia_driver_installer_manifest" {
-  url = "https://raw.githubusercontent.com/GoogleCloudPlatform/container-engine-accelerators/master/nvidia-driver-installer/cos/daemonset-preloaded.yaml"
+resource "helm_release" "jupyterhub" {
+  name       = "jupyterhub"
+  repository = "https://hub.jupyter.org/helm-chart/"
+  chart      = "jupyterhub"
+  namespace  = var.namespace
+
+  cleanup_on_fail = "true"
+
+  values = [
+    file("${path.module}/jupyter_config/config.yaml")
+  ]
 }
 
-resource "kubectl_manifest" "nvidia_driver_installer" {
-  yaml_body = data.http.nvidia_driver_installer_manifest.response_body
-  count = var.enable_autopilot == false ? 1 : 0
-}

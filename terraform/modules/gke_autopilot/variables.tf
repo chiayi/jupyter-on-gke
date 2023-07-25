@@ -38,11 +38,16 @@ variable "namespace" {
 
 variable "num_gpu_nodes" {
   description = "Number of GPU nodes in the cluster"
-  default     = 1
+  default     = 3
 }
 
 variable "enable_autopilot" {
   type        = bool
   description = "Set to true to enable GKE Autopilot clusters"
-  default     = false
+  default     = true
+}
+
+variable "gpu_type" {
+  default     = "nvidia-tesla-a100"
+  description = "the GPU accelerator type"
 }

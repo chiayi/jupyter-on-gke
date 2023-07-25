@@ -30,8 +30,14 @@ variable "cluster_name" {
   default     = "ml-cluster"
 }
 
+variable "namespace" {
+  type = string
+  description = "Kubernetes namespace where resources are deployed"
+  default = "default"
+}
+
 variable "enable_autopilot" {
   type        = bool
   description = "Set to true to enable GKE Autopilot clusters"
-  default     = false
+  default     = true
 }

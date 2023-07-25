@@ -30,7 +30,4 @@ terraform {
       version = "2.0.1"
     }
   }
-  provider_meta "google" {
-    module_name = "blueprints/terraform/terraform-google-kubernetes-engine:kuberay/v0.1.0"
-  }
 }

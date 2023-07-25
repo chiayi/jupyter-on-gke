@@ -48,6 +48,6 @@ variable "enable_autopilot" {
 }
 
 variable "gpu_type" {
-  default     = "nvidia-tesla-a100"
+  default     = "nvidia-tesla-t4"
   description = "the GPU accelerator type"
 }
