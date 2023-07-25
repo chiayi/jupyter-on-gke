@@ -21,7 +21,7 @@ create-cluster:
 	-var cluster_name=$(NAME) \
 	-var enable_autopilot=$(AUTOPILOT) \
 	&& cd ../ && $(MAKE) gcloud-auth-cluster NAME=$(NAME) LOCATION=$(LOCATION) \
-	&& kubectl get svc proxy-public -o jsonpath="{.status.loadBalancer.ingress[0].ip}" 
+	&& kubectl get svc proxy-public -o jsonpath="{.status.loadBalancer.ingress[0].ip}" \\ 
 
 delete-cluster: 
 	cd ./terraform/ && terraform destroy -auto-approve
