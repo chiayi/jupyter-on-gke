@@ -6,7 +6,7 @@ Setup `gcloud` if you have not to point at your project
 
 Make sure that you have the following installed:
 * Terraform
-* <Dependency here>
+* \<Dependency here\>
 
 ## Installation
 
