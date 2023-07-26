@@ -1,6 +1,6 @@
 # jupyter-on-gke
 Attempt to run JupyterHb on GKE
-> The `make` commands are used to make things simpler but manually running terraform and getting the IP would do the same 
+> The `make` commands are used to make things simpler but manually running terraform and getting the IP from kubectl would do the same 
 
 Setup `gcloud` if you have not to point at your project
 
