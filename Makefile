@@ -14,12 +14,14 @@ gcloud-auth-cluster:
 plan-terraform:
 	cd ./terraform/ && terraform plan
 
+create-cluster: PROJECT ?= aaronliang-agones-gke-dev
 create-cluster: LOCATION ?= us-central1
 create-cluster: NAME ?= ml-cluster
 create-cluster: AUTOPILOT ?= false
 create-cluster:
 	cd ./terraform/ && \
 	terraform apply -auto-approve \
+	-var project_id=$(PROJECT) \
 	-var region=$(LOCATION) \
 	-var cluster_name=$(NAME) \
 	-var enable_autopilot=$(AUTOPILOT) \
