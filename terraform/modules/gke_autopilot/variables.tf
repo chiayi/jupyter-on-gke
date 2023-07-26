@@ -38,7 +38,7 @@ variable "namespace" {
 
 variable "num_gpu_nodes" {
   description = "Number of GPU nodes in the cluster"
-  default     = 3
+  default     = 2
 }
 
 variable "enable_autopilot" {
@@ -48,6 +48,6 @@ variable "enable_autopilot" {
 }
 
 variable "gpu_type" {
-  default     = "nvidia-tesla-a100"
+  default     = "nvidia-tesla-t4"
   description = "the GPU accelerator type"
 }

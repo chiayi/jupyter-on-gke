@@ -72,6 +72,8 @@ module "gke_standard" {
 module "kubernetes" {
   source = "./modules/kubernetes"
 
+  count = var.enable_autopilot ? 0 : 1
+
   depends_on   = [module.gke_standard]
   region       = var.region
   cluster_name = var.cluster_name
