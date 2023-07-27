@@ -1,8 +1,9 @@
 # Makefile for running terraform without having to actually change the terraform variables
 # Changes needed:
 # 		- addtional variables for cluster
-# 		- installing jupyterhub
-# 		- creating an autopilot cluster
+#			- Namespace, number of nodes, gpu type
+# 		- updating jupyterhub only -> seems like applying should do the trick
+# 		- creating an autopilot cluster -> using enable_autopilot variable
 # 		- 
 
 init-terraform: 

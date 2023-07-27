@@ -14,26 +14,26 @@
 
 output "project_id" {
   description = "GCP project id"
-  value       = var.enable_autopilot ? resource.google_container_cluster.ml_cluster[0].project : null
+  value       = var.enable_autopilot ? resource.google_container_cluster.gke[0].project : null
 }
 
 output "region" {
   description = "GCP region"
-  value       = var.enable_autopilot ? resource.google_container_cluster.ml_cluster[0].location : null
+  value       = var.enable_autopilot ? resource.google_container_cluster.gke[0].location : null
 }
 
 output "cluster_name" {
   description = "The name of the GKE cluster"
-  value       = var.enable_autopilot ? resource.google_container_cluster.ml_cluster[0].name : null
+  value       = var.enable_autopilot ? resource.google_container_cluster.gke[0].name : null
 }
 
 output "kubernetes_host" {
   description = "Kubernetes cluster host"
-  value       = var.enable_autopilot ? resource.google_container_cluster.ml_cluster[0].endpoint : null
+  value       = var.enable_autopilot ? resource.google_container_cluster.gke[0].endpoint : null
 }
 
 output "cluster_certicicate" {
   description = "Kubernetes cluster ca certificate"
-  value       = var.enable_autopilot ? base64decode(resource.google_container_cluster.ml_cluster[0].master_auth[0].cluster_ca_certificate) : null
+  value       = var.enable_autopilot ? base64decode(resource.google_container_cluster.gke[0].master_auth[0].cluster_ca_certificate) : null
   sensitive   = true
 }

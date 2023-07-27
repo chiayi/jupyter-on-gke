@@ -14,7 +14,7 @@
 
 data "google_client_config" "provider" {}
 
-data "google_container_cluster" "ml_cluster" {
+data "google_container_cluster" "gke" {
   name       = var.cluster_name
   location   = var.region
   depends_on = [module.gke_autopilot, module.gke_standard]
@@ -26,28 +26,34 @@ provider "google" {
 }
 
 provider "kubernetes" {
-  host  = data.google_container_cluster.ml_cluster.endpoint
+  host  = data.google_container_cluster.gke.endpoint
   token = data.google_client_config.provider.access_token
   cluster_ca_certificate = base64decode(
-    data.google_container_cluster.ml_cluster.master_auth[0].cluster_ca_certificate
+    data.google_container_cluster.gke.master_auth[0].cluster_ca_certificate
   )
+
+  # config_path = pathexpand("~/.kube/config")
 }
 
 provider "kubectl" {
-  host  = data.google_container_cluster.ml_cluster.endpoint
+  host  = data.google_container_cluster.gke.endpoint
   token = data.google_client_config.provider.access_token
   cluster_ca_certificate = base64decode(
-    data.google_container_cluster.ml_cluster.master_auth[0].cluster_ca_certificate
+    data.google_container_cluster.gke.master_auth[0].cluster_ca_certificate
   )
+
+  # config_path = pathexpand("~/.kube/config")
 }
 
 provider "helm" {
   kubernetes {
-    host  = data.google_container_cluster.ml_cluster.endpoint
+    host  = data.google_container_cluster.gke.endpoint
     token = data.google_client_config.provider.access_token
     cluster_ca_certificate = base64decode(
-      data.google_container_cluster.ml_cluster.master_auth[0].cluster_ca_certificate
+      data.google_container_cluster.gke.master_auth[0].cluster_ca_certificate
     )
+
+    # config_path = pathexpand("~/.kube/config")
   }
 }
 
@@ -83,6 +89,5 @@ module "kubernetes" {
 module "jupyterhub" {
   source = "./modules/jupyterhub"
 
-  depends_on = [module.kubernetes]
   namespace  = var.namespace
 }

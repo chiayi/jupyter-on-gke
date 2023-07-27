@@ -19,7 +19,7 @@ provider "google" {
 
 
 # GKE cluster
-resource "google_container_cluster" "ml_cluster" {
+resource "google_container_cluster" "gke" {
   name     = var.cluster_name
   location = var.region
   count    = var.enable_autopilot == false ? 1 : 0
@@ -42,10 +42,10 @@ resource "google_container_cluster" "ml_cluster" {
   }
 }
 
-resource "google_container_node_pool" "gpu_pool" {
+resource "google_container_node_pool" "gpu" {
   name       = "gpu-pool"
   location   = var.region
-  cluster    = var.enable_autopilot == false ? google_container_cluster.ml_cluster[0].name : null
+  cluster    = var.enable_autopilot == false ? google_container_cluster.gke[0].name : null
   node_count = var.num_gpu_nodes
   count      = var.enable_autopilot == false ? 1 : 0
 

@@ -19,7 +19,7 @@ provider "google" {
 
 
 # GKE cluster
-resource "google_container_cluster" "ml_cluster" {
+resource "google_container_cluster" "gke" {
   name     = var.cluster_name
   location = var.region
   count    = var.enable_autopilot == true ? 1 : 0
