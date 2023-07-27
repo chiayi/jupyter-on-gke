@@ -32,7 +32,7 @@ provider "kubernetes" {
     data.google_container_cluster.gke.master_auth[0].cluster_ca_certificate
   )
 
-  # config_path = pathexpand("~/.kube/config")
+  config_path = pathexpand("~/.kube/config")
 }
 
 provider "kubectl" {
@@ -42,7 +42,7 @@ provider "kubectl" {
     data.google_container_cluster.gke.master_auth[0].cluster_ca_certificate
   )
 
-  # config_path = pathexpand("~/.kube/config")
+  config_path = pathexpand("~/.kube/config")
 }
 
 provider "helm" {
@@ -53,7 +53,7 @@ provider "helm" {
       data.google_container_cluster.gke.master_auth[0].cluster_ca_certificate
     )
 
-    # config_path = pathexpand("~/.kube/config")
+    config_path = pathexpand("~/.kube/config")
   }
 }
 
