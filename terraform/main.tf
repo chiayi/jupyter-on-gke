@@ -91,3 +91,10 @@ module "jupyterhub" {
 
   namespace  = var.namespace
 }
+
+module "storage" {
+  source = "./modules/storage"
+  gcp_project_id = var.project_id
+  gcp_region = var.region
+  include_module_storage = var.include_module_storage
+}
