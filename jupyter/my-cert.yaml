@@ -1,0 +1,8 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: jupyter-tls
+  namespace: imreddy-jupyter
+spec:
+  domains:
+  - 34.95.98.100.nip.io

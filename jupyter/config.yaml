@@ -10,17 +10,7 @@
 hub:
   config:
     Authenticator:
-      admin_users:
-        - user1
-        - user2
-      allowed_users:
-        - user3
-        - user4
-    # ...
-    DummyAuthenticator:
-      password: password
-    JupyterHub:
-      authenticator_class: dummy
+      auto_login: true
   networkPolicy:
     enabled: false
 
@@ -46,7 +36,7 @@ singleuser:
   image:
     name: jupyter/datascience-notebook
     tag: python-3.10
-  startTimeout: 300
+  startTimeout: 1000
   profileList:
     - display_name: "Prof1"
       description: "Profile 1"
@@ -56,7 +46,9 @@ singleuser:
       kubespawner_override:
         image: jupyter/datascience-notebook:python-3.11
         extra_resource_limits:
-          nvidia.com/gpu: "3"
+          nvidia.com/gpu: "1"
+        node_selector:
+          cloud.google.com/gke-accelerator: nvidia-tesla-t4
     - display_name: "Prof3"
       description: "Profile 3"
       kubespawner_override:

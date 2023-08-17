@@ -1,0 +1,7 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'pull', 'docker.io/jupyter/datascience-notebook' ]
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'gcr.io/imreddy-gke-dev/datascience-notebook-auth', '.' ]
+images:
+- 'gcr.io/imreddy-gke-dev/datascience-notebook-auth'
